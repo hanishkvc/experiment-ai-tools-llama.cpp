@@ -1221,6 +1221,7 @@ add_library(llama
             unicode.h
             unicode.cpp
             unicode-data.cpp
+            common/chaton_meta.cpp
             )
 
 target_include_directories(llama PUBLIC .)
