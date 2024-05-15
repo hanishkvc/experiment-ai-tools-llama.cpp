@@ -17983,6 +17983,8 @@ static int32_t llama_chat_apply_template_internal(
     return dest.size();
 }
 
+#include <chaton.hpp>
+
 LLAMA_API int32_t llama_chat_apply_template(
                 const struct llama_model * model,
                               const char * tmpl,
@@ -18014,7 +18016,8 @@ LLAMA_API int32_t llama_chat_apply_template(
     }
 
     std::string formatted_chat;
-    int32_t res = llama_chat_apply_template_internal(curr_tmpl, chat_vec, formatted_chat, add_ass);
+    //int32_t res = llama_chat_apply_template_internal(curr_tmpl, chat_vec, formatted_chat, add_ass);
+    int32_t res = chaton_tmpl_apply("llama3", chat_vec, add_ass, true, formatted_chat);
     if (res < 0) {
         return res;
     }
