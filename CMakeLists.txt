@@ -1219,10 +1219,12 @@ add_library(llama
             unicode.h
             unicode.cpp
             unicode-data.cpp
+            common/chaton_meta.cpp
             )
 
 target_include_directories(llama PUBLIC .)
-target_compile_features   (llama PUBLIC cxx_std_11) # don't bump
+target_include_directories(llama PUBLIC common)
+target_compile_features   (llama PUBLIC cxx_std_17) # don't bump
 
 target_link_libraries(llama PRIVATE
     ggml
