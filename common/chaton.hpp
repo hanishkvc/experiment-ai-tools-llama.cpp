@@ -462,6 +462,7 @@ public:
             int curSystemMsgCnt = 0,
             int curUserMsgCnt = 0
             ) {
+        std::cout << "******* chat-tmpl-apply-ex ******" << std::endl;
         std::string tmpl = tmplId;
         if (!tmpl_exists(tmpl)) {
             tmpl = tmplFallback;

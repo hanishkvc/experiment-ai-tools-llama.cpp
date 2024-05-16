@@ -782,6 +782,7 @@ struct server_context {
             for (const auto & p : json_prompt) {
                 if (p.is_string()) {
                     auto s = p.template get<std::string>();
+                    LOG_TEELN("DBUG:ServerContext:Tokenize:A:%s", s.c_str());
 
                     std::vector<llama_token> p;
                     if (first) {
@@ -802,6 +803,7 @@ struct server_context {
             }
         } else {
             auto s = json_prompt.template get<std::string>();
+            LOG_TEELN("DBUG:ServerContext:Tokenize:S:%s", s.c_str());
             prompt_tokens = ::llama_tokenize(ctx, s, add_special, TMP_FORCE_SPECIAL);
         }
 
@@ -3420,6 +3422,8 @@ int main(int argc, char ** argv) {
     };
 
     const auto handle_completions = [&ctx_server, &res_error](const httplib::Request & req, httplib::Response & res) {
+        LOG_TEELN("DBUG:HandleCompletions:%s", req.body.c_str());
+
         res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin"));
 
         json data = json::parse(req.body);
@@ -3515,6 +3519,7 @@ int main(int argc, char ** argv) {
     };
 
     const auto handle_chat_completions = [&ctx_server, &sparams, &res_error](const httplib::Request & req, httplib::Response & res) {
+        LOG_TEELN("DBUG:HandleChatCompletions:%s", req.body.c_str());
         res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin"));
         json data = oaicompat_completion_params_parse(ctx_server.model, json::parse(req.body), sparams.chat_template);
 

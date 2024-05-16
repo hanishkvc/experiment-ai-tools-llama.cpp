@@ -23,8 +23,8 @@
 #include "log.h"
 #define LINFO_LN LOG_TEELN
 #ifdef GKV_DEBUGLOG_ON
-#define LDBUG LOG
-#define LDBUG_LN LOGLN
+#define LDBUG LOG_TEE
+#define LDBUG_LN LOG_TEELN
 #else
 #define LDBUG_LN(...)
 #define LDBUG(...)

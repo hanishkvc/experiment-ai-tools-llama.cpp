@@ -374,6 +374,8 @@ static json oaicompat_completion_params_parse(
     llama_params["temperature"]       = json_value(body,   "temperature",       1.0);
     llama_params["top_p"]             = json_value(body,   "top_p",             1.0);
 
+    std::cout << "********* oaicompat_completion_params_parse ********** " << body.at("messages").size() << std::endl;
+
     // Apply chat template to the list of messages
     llama_params["prompt"] = format_chat(model, chat_template, body.at("messages"));
 
