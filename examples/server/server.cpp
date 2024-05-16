@@ -5,6 +5,8 @@
 #include "llama.h"
 #include "grammar-parser.h"
 
+#include "chaton.hpp"
+
 #ifndef NDEBUG
 // crash the server in debug mode, otherwise send an http 500 error
 #define CPPHTTPLIB_NO_EXCEPTIONS 1
@@ -2507,6 +2509,13 @@ static void server_params_parse(int argc, char ** argv, server_params & sparams,
                 break;
             }
             params.model = argv[i];
+        } else if (arg == "--chaton-template-id") {
+            if (++i >= argc) {
+                invalid_param = true;
+                break;
+            }
+            params.chaton_template_id = argv[i];
+            chaton_meta_fallback(params.chaton_template_id);
         } else if (arg == "-mu" || arg == "--model-url") {
             if (++i >= argc) {
                 invalid_param = true;
